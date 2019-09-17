@@ -25,11 +25,16 @@ class BowlingGame {
                 }
     }
 
-    private fun convertRoll(roll: Char, previousValue: Int) =
-            specialValues[roll] ?: getDynamicValue(roll, previousValue) ?: 0
+    private fun convertRoll(roll: Char, previousValue: Int): Int {
+        return specialValues[roll] ?: return getDynamicValue(roll, previousValue)
+    }
 
     private fun getDynamicValue(roll: Char, previousValue: Int): Int {
-        return roll == '/'? 20-previousValue: roll.intValue()
+        if (roll == '/') {
+            return 20 - previousValue
+        } else {
+            return roll.intValue()
+        }
     }
 
     private fun Char.intValue() = Integer.parseInt(this.toString())
